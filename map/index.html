@@ -8,3 +8,24 @@ var map = new google.maps.Map(mapEl, {
   zoom: 5
 });
 
+// Replace this with your URL.
+var TILE_URL = 'https://app-podmpdmapituile-preprod-001.azurewebsites.net/pgserv.v_place/{z}/{x}/{y}.pbf';
+
+// Name the layer anything you like.
+var layerID = 'my_custom_layer';
+
+// Create a new ImageMapType layer.
+var layer = new google.maps.ImageMapType({
+  name: layerID,
+  getTileUrl: function(coord, zoom) {
+    console.log(coord);
+    var url = TILE_URL
+      .replace('{x}', coord.x)
+      .replace('{y}', coord.y)
+      .replace('{z}', zoom);
+    return url;
+  },
+  tileSize: new google.maps.Size(256, 256),
+  minZoom: 1,
+  maxZoom: 20
+});
