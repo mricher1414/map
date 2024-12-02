@@ -29,4 +29,7 @@ var layer = new google.maps.ImageMapType({
   maxZoom: 20
 });
 
+// Register the new layer, then activate it.
+map.mapTypes.set(layerID, layer);
+map.setMapTypeId(layerID);
 </script>
